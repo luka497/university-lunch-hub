@@ -157,33 +157,6 @@ function Panel() {
           </section>
         ))}
       </div>
-
-      <section className="mt-8 rounded-xl border border-dashed border-border bg-surface p-5">
-        <div className="flex items-center gap-2">
-          <Zap className="h-4 w-4 text-brand" />
-          <h2 className="font-semibold">Panel de demostración</h2>
-        </div>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Simula el canje de raciones en el comedor para ver cómo cambian los estados del{" "}
-          {nombreDia(dia).toLowerCase()}.
-        </p>
-        <div className="mt-4 flex flex-wrap items-center gap-4">
-          <div className="min-w-[240px] flex-1">
-            <Slider value={[canjes]} min={1} max={60} step={1} onValueChange={(v) => setCanjes(v[0] ?? 1)} />
-          </div>
-          <span className="w-28 text-sm font-medium">{canjes} raciones</span>
-          <Button onClick={() => simularCanjes(canjes, dia)}>Simular canjes</Button>
-          <Button variant="outline" onClick={reiniciarStock}>
-            <RotateCcw className="mr-2 h-4 w-4" />
-            Reiniciar stock
-          </Button>
-        </div>
-        <p className="mt-3 flex items-start gap-2 text-xs text-muted-foreground">
-          <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-          Un menú pasa a "Por agotar" cuando queda 20% o menos de lo producido, y a "Agotado" cuando llega a
-          cero.
-        </p>
-      </section>
     </AppShell>
   );
 }
