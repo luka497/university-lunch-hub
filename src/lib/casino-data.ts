@@ -9,8 +9,8 @@ export const TIPOS: { id: TipoMenu; nombre: string }[] = [
 ];
 
 export const COMEDORES: { id: ComedorId; nombre: string; ubicacion: string }[] = [
-  { id: "casa-central", nombre: "Casino Casa Central", ubicacion: "Av. España 1680, patio central" },
-  { id: "edificio-p", nombre: "Casino Edificio P", ubicacion: "Edificio P, primer piso" },
+  { id: "casa-central", nombre: "Casino Casa Central", ubicacion: "patio central" },
+  { id: "edificio-p", nombre: "Casino Edificio P", ubicacion: "Edificio P, Cuarto piso" },
 ];
 
 export const DIAS: { id: DiaId; nombre: string; corto: string; fecha: string }[] = [
