@@ -39,9 +39,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Panel() {
-  const { platoDe, suscripcion, reservas, simularCanjes, reiniciarStock } = useCasino();
+  const { platoDe, suscripcion, reservas } = useCasino();
   const [dia, setDia] = useState<DiaId>("lun");
-  const [canjes, setCanjes] = useState(10);
 
   const comprometidos = useMemo(() => {
     const map = new Map<string, string>();
