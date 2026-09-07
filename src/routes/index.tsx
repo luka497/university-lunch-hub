@@ -1,10 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { AlertTriangle, CalendarClock, Info, RotateCcw, Zap } from "lucide-react";
+import { AlertTriangle, CalendarClock } from "lucide-react";
 import { AppShell } from "@/components/casino/AppShell";
 import { MenuCard } from "@/components/casino/MenuCard";
-import { Button } from "@/components/ui/button";
-import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
 import {
   COMEDORES,
