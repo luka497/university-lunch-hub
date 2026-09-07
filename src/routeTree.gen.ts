@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as MisCompromisosRouteImport } from './routes/mis-compromisos'
+import { Route as ReservarRouteImport } from './routes/reservar'
+import { Route as SuscripcionRouteImport } from './routes/suscripcion'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MisCompromisosRoute = MisCompromisosRouteImport.update({
+  id: '/mis-compromisos',
+  path: '/mis-compromisos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReservarRoute = ReservarRouteImport.update({
+  id: '/reservar',
+  path: '/reservar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuscripcionRoute = SuscripcionRouteImport.update({
+  id: '/suscripcion',
+  path: '/suscripcion',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/mis-compromisos': typeof MisCompromisosRoute
+  '/reservar': typeof ReservarRoute
+  '/suscripcion': typeof SuscripcionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/mis-compromisos': typeof MisCompromisosRoute
+  '/reservar': typeof ReservarRoute
+  '/suscripcion': typeof SuscripcionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/mis-compromisos': typeof MisCompromisosRoute
+  '/reservar': typeof ReservarRoute
+  '/suscripcion': typeof SuscripcionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/mis-compromisos' | '/reservar' | '/suscripcion'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/mis-compromisos' | '/reservar' | '/suscripcion'
+  id: '__root__' | '/' | '/mis-compromisos' | '/reservar' | '/suscripcion'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MisCompromisosRoute: typeof MisCompromisosRoute
+  ReservarRoute: typeof ReservarRoute
+  SuscripcionRoute: typeof SuscripcionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mis-compromisos': {
+      id: '/mis-compromisos'
+      path: '/mis-compromisos'
+      fullPath: '/mis-compromisos'
+      preLoaderRoute: typeof MisCompromisosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reservar': {
+      id: '/reservar'
+      path: '/reservar'
+      fullPath: '/reservar'
+      preLoaderRoute: typeof ReservarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/suscripcion': {
+      id: '/suscripcion'
+      path: '/suscripcion'
+      fullPath: '/suscripcion'
+      preLoaderRoute: typeof SuscripcionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MisCompromisosRoute: MisCompromisosRoute,
+  ReservarRoute: ReservarRoute,
+  SuscripcionRoute: SuscripcionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
