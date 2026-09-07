@@ -1,24 +1,192 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
+import { AlertTriangle, CalendarClock, Info, RotateCcw, Zap } from "lucide-react";
+import { AppShell } from "@/components/casino/AppShell";
+import { MenuCard } from "@/components/casino/MenuCard";
+import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
+import { cn } from "@/lib/utils";
+import {
+  COMEDORES,
+  DIAS,
+  HORA_CORTE,
+  TIPOS,
+  estadoDe,
+  fechaDia,
+  keyDe,
+  nombreComedor,
+  nombreDia,
+  nombreTipo,
+  type DiaId,
+} from "@/lib/casino-data";
+import { useCasino } from "@/lib/casino-store";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Disponibilidad de menús | Casino USM" },
+      {
+        name: "description",
+        content:
+          "Revisa en tiempo real cuántas raciones quedan de los menús común, vegetariano e hipocalórico en los casinos de la universidad antes de salir de tu oficina.",
+      },
+      { property: "og:title", content: "Disponibilidad de menús | Casino USM" },
+      {
+        property: "og:description",
+        content: "Estado en vivo de los menús del casino y gestión de tus compromisos de almuerzo.",
+      },
+    ],
+  }),
+  component: Panel,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Panel() {
+  const { platoDe, suscripcion, reservas, simularCanjes, reiniciarStock } = useCasino();
+  const [dia, setDia] = useState<DiaId>("lun");
+  const [canjes, setCanjes] = useState(10);
+
+  const comprometidos = useMemo(() => {
+    const map = new Map<string, string>();
+    reservas.forEach((r) =>
+      map.set(
+        keyDe(r.dia, r.comedor, r.tipo),
+        r.confirmada ? "Tu reserva puntual confirmada" : "Tu reserva puntual pendiente de confirmar",
+      ),
+    );
+    suscripcion?.dias
+      .filter((d) => !d.liberado)
+      .forEach((d) => map.set(keyDe(d.dia, suscripcion.comedor, d.tipo), "Incluido en tu suscripción"));
+    return map;
+  }, [reservas, suscripcion]);
+
+  const alertas = useMemo(() => {
+    const out: { texto: string; estado: "por-agotar" | "agotado" }[] = [];
+    comprometidos.forEach((detalle, key) => {
+      const [d, c, t] = key.split("|") as [DiaId, never, never];
+      const plato = platoDe(d, c, t);
+      const estado = estadoDe(plato);
+      if (estado === "disponible") return;
+      out.push({
+        estado,
+        texto: `${nombreTipo(t)} del ${nombreDia(d).toLowerCase()} en ${nombreComedor(c)} — ${detalle.toLowerCase()}`,
+      });
+    });
+    return out;
+  }, [comprometidos, platoDe]);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <AppShell>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="font-[family-name:var(--font-display)] text-3xl font-semibold text-foreground">
+            Disponibilidad de menús
+          </h1>
+          <p className="mt-1 text-muted-foreground">
+            Revisa cuántas raciones quedan antes de bajar al comedor.
+          </p>
+        </div>
+        <div className="flex items-center gap-2 rounded-md border border-brand/30 bg-brand-soft px-3 py-2 text-sm text-brand">
+          <CalendarClock className="h-4 w-4" />
+          Puedes reservar, modificar o liberar hasta las <strong>{HORA_CORTE} hrs</strong> de cada día.
+        </div>
+      </div>
+
+      {alertas.length > 0 && (
+        <div className="mt-6 space-y-2">
+          {alertas.map((a, i) => (
+            <div
+              key={i}
+              className={cn(
+                "flex items-start gap-3 rounded-lg border p-3 text-sm",
+                a.estado === "agotado"
+                  ? "border-danger/50 bg-danger-soft text-danger"
+                  : "border-warning/60 bg-warning-soft text-warning-foreground",
+              )}
+            >
+              <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+              <p>
+                <strong>{a.estado === "agotado" ? "Menú agotado: " : "Quedan pocas raciones: "}</strong>
+                {a.texto}.{" "}
+                <Link to="/mis-compromisos" className="underline underline-offset-2">
+                  Revisar mis compromisos
+                </Link>
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="mt-6 flex flex-wrap gap-2">
+        {DIAS.map((d) => (
+          <button
+            key={d.id}
+            onClick={() => setDia(d.id)}
+            className={cn(
+              "rounded-md border px-4 py-2 text-sm font-medium transition-colors",
+              dia === d.id
+                ? "border-brand bg-brand text-brand-foreground"
+                : "border-border bg-surface text-foreground hover:bg-secondary",
+            )}
+          >
+            {d.nombre}
+            <span className="ml-2 text-xs opacity-70">{d.fecha.split(" de ")[0]}</span>
+          </button>
+        ))}
+      </div>
+
+      <p className="mt-3 text-sm text-muted-foreground">
+        Minuta del {nombreDia(dia).toLowerCase()} {fechaDia(dia)}
+      </p>
+
+      <div className="mt-4 space-y-6">
+        {COMEDORES.map((c) => (
+          <section key={c.id} className="rounded-xl border border-border bg-secondary/40 p-4">
+            <header className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+              <h2 className="font-[family-name:var(--font-display)] text-xl font-semibold">{c.nombre}</h2>
+              <span className="text-sm text-muted-foreground">{c.ubicacion}</span>
+            </header>
+            <div className="grid gap-3 md:grid-cols-3">
+              {TIPOS.map((t) => {
+                const plato = platoDe(dia, c.id, t.id);
+                return (
+                  <MenuCard
+                    key={t.id}
+                    plato={plato}
+                    comprometido={comprometidos.get(plato.key)}
+                  />
+                );
+              })}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <section className="mt-8 rounded-xl border border-dashed border-border bg-surface p-5">
+        <div className="flex items-center gap-2">
+          <Zap className="h-4 w-4 text-brand" />
+          <h2 className="font-semibold">Panel de demostración</h2>
+        </div>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Simula el canje de raciones en el comedor para ver cómo cambian los estados del{" "}
+          {nombreDia(dia).toLowerCase()}.
+        </p>
+        <div className="mt-4 flex flex-wrap items-center gap-4">
+          <div className="min-w-[240px] flex-1">
+            <Slider value={[canjes]} min={1} max={60} step={1} onValueChange={(v) => setCanjes(v[0])} />
+          </div>
+          <span className="w-28 text-sm font-medium">{canjes} raciones</span>
+          <Button onClick={() => simularCanjes(canjes, dia)}>Simular canjes</Button>
+          <Button variant="outline" onClick={reiniciarStock}>
+            <RotateCcw className="mr-2 h-4 w-4" />
+            Reiniciar stock
+          </Button>
+        </div>
+        <p className="mt-3 flex items-start gap-2 text-xs text-muted-foreground">
+          <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+          Un menú pasa a "Por agotar" cuando queda 20% o menos de lo producido, y a "Agotado" cuando llega a
+          cero.
+        </p>
+      </section>
+    </AppShell>
   );
 }
