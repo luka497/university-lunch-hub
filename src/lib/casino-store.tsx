@@ -132,7 +132,7 @@ export function CasinoProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value: Ctx = {
-    usuario: { nombre: "Carolina Ríos", cargo: "Dirección de Asuntos Docentes · Casa Central" },
+    usuario: { nombre: "Pedro Gonzales", cargo: "Dirección de Asuntos Docentes · Casa Central" },
     platos,
     suscripcion,
     reservas,
