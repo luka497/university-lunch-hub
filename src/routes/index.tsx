@@ -172,7 +172,7 @@ function Panel() {
         </p>
         <div className="mt-4 flex flex-wrap items-center gap-4">
           <div className="min-w-[240px] flex-1">
-            <Slider value={[canjes]} min={1} max={60} step={1} onValueChange={(v) => setCanjes(v[0])} />
+            <Slider value={[canjes]} min={1} max={60} step={1} onValueChange={(v) => setCanjes(v[0] ?? 1)} />
           </div>
           <span className="w-28 text-sm font-medium">{canjes} raciones</span>
           <Button onClick={() => simularCanjes(canjes, dia)}>Simular canjes</Button>

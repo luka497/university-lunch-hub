@@ -77,11 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Casino USM · Gestión de almuerzos" },
+      {
+        name: "description",
+        content:
+          "Plataforma de almuerzos para funcionarios y docentes: disponibilidad de menús en tiempo real, suscripciones y reservas puntuales.",
+      },
+      { name: "author", content: "Casino USM" },
+      { property: "og:title", content: "Casino USM · Gestión de almuerzos" },
+      {
+        property: "og:description",
+        content: "Disponibilidad de menús en tiempo real, suscripciones y reservas puntuales.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },

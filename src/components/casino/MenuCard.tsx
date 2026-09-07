@@ -44,8 +44,8 @@ export function MenuCard({
   compacto,
 }: {
   plato: Plato;
-  comprometido?: string;
-  compacto?: boolean;
+  comprometido?: string | undefined;
+  compacto?: boolean | undefined;
 }) {
   const estado = estadoDe(plato);
   const s = estilos[estado];

@@ -208,7 +208,7 @@ function Compromisos() {
       </div>
 
       <p className="mt-6 text-xs text-muted-foreground">
-        Semana mostrada: {DIAS[0].fecha} al {DIAS[DIAS.length - 1].fecha}.
+        Semana mostrada: {DIAS[0]!.fecha} al {DIAS[DIAS.length - 1]!.fecha}.
       </p>
     </AppShell>
   );
