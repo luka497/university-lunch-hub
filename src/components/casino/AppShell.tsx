@@ -34,7 +34,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div className="ml-auto flex items-center gap-4 text-sm">
             <span className="hidden items-center gap-2 rounded-md bg-brand-foreground/10 px-3 py-1.5 sm:flex">
               <Clock3 className="h-4 w-4" />
-              Corte diario {HORA_CORTE} hrs
+              Corte diario {HORA_CORTE} hrs del día anterior
             </span>
             <span className="flex items-center gap-2">
               <User className="h-4 w-4" />

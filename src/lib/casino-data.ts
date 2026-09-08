@@ -21,7 +21,7 @@ export const DIAS: { id: DiaId; nombre: string; corto: string; fecha: string }[]
   { id: "vie", nombre: "Viernes", corto: "V", fecha: "11 de septiembre" },
 ];
 
-export const HORA_CORTE = "10:30";
+export const HORA_CORTE = "16:00";
 
 export type Plato = {
   key: string;

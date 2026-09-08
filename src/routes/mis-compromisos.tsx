@@ -181,7 +181,7 @@ function Compromisos() {
                     </div>
                     <p className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
                       <Clock3 className="h-3.5 w-3.5" />
-                      Puedes liberar este cupo hasta las {HORA_CORTE} hrs del {nombreDia(r.dia).toLowerCase()}.
+                      Puedes liberar este cupo hasta las {HORA_CORTE} hrs del día anterior.
                     </p>
                     <div className="mt-3 flex gap-2">
                       {!r.confirmada && (
