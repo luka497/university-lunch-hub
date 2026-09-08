@@ -231,7 +231,7 @@ function SuscripcionWizard() {
                     ))}
                   </ul>
                   <p className="mt-2 text-xs">
-                    Podrás liberar días puntuales hasta las {HORA_CORTE} hrs del día correspondiente.
+                    Podrás liberar días puntuales hasta las {HORA_CORTE} hrs del día anterior.
                   </p>
                 </div>
               )}

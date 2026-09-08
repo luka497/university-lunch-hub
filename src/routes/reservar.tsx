@@ -208,7 +208,7 @@ function ReservaPuntual() {
             <div className="mt-4 rounded-lg border border-warning/60 bg-warning-soft p-4 text-sm text-warning-foreground">
               <p>
                 <strong>Al confirmar, cocina preparará tu plato.</strong> Si no vas a asistir, libera tu cupo
-                antes de las {HORA_CORTE} hrs del {nombreDia(dia).toLowerCase()} para que otra persona pueda
+                antes de las {HORA_CORTE} hrs del día anterior para que otra persona pueda
                 usarlo.
               </p>
             </div>

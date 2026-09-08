@@ -84,7 +84,7 @@ function Panel() {
         </div>
         <div className="flex items-center gap-2 rounded-md border border-brand/30 bg-brand-soft px-3 py-2 text-sm text-brand">
           <CalendarClock className="h-4 w-4" />
-          Puedes reservar, modificar o liberar hasta las <strong>{HORA_CORTE} hrs</strong> de cada día.
+          Puedes reservar, modificar o liberar hasta las <strong>{HORA_CORTE} hrs</strong> del día anterior.
         </div>
       </div>
 
