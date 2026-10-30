@@ -29,6 +29,8 @@ export const Route = createFileRoute("/mis-compromisos")({
         property: "og:description",
         content: "Suscripción y reservas puntuales, claramente separadas, con su hora de corte.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Compromisos,

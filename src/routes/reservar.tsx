@@ -36,6 +36,8 @@ export const Route = createFileRoute("/reservar")({
         property: "og:description",
         content: "Reserva puntual con confirmación explícita y plazo claro para liberar el cupo.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: ReservaPuntual,

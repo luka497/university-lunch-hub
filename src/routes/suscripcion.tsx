@@ -32,6 +32,8 @@ export const Route = createFileRoute("/suscripcion")({
         property: "og:description",
         content: "Modalidad, días de asistencia y menú por defecto en tres pasos.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: SuscripcionWizard,
