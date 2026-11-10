@@ -72,6 +72,20 @@
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-soft: var(--brand-soft);
+  --color-cat-sopa: var(--cat-sopa);
+  --color-cat-sopa-soft: var(--cat-sopa-soft);
+  --color-cat-ensalada: var(--cat-ensalada);
+  --color-cat-ensalada-soft: var(--cat-ensalada-soft);
+  --color-cat-fondo-a: var(--cat-fondo-a);
+  --color-cat-fondo-a-soft: var(--cat-fondo-a-soft);
+  --color-cat-fondo-b: var(--cat-fondo-b);
+  --color-cat-fondo-b-soft: var(--cat-fondo-b-soft);
+  --color-cat-postres: var(--cat-postres);
+  --color-cat-postres-soft: var(--cat-postres-soft);
+  --color-cat-vegetariano: var(--cat-vegetariano);
+  --color-cat-vegetariano-soft: var(--cat-vegetariano-soft);
+  --color-cat-hipocalorico: var(--cat-hipocalorico);
+  --color-cat-hipocalorico-soft: var(--cat-hipocalorico-soft);
   --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Bitter", Georgia, serif;
 }
@@ -123,6 +137,20 @@
   --brand: oklch(0.36 0.096 252);
   --brand-foreground: oklch(0.99 0.005 250);
   --brand-soft: oklch(0.945 0.022 252);
+  --cat-sopa: oklch(0.55 0.13 60);
+  --cat-sopa-soft: oklch(0.96 0.04 60);
+  --cat-ensalada: oklch(0.49999999999999994 0.15 140);
+  --cat-ensalada-soft: oklch(0.96 0.04 140);
+  --cat-fondo-a: oklch(0.39999999999999997 0.15 35);
+  --cat-fondo-a-soft: oklch(0.96 0.04 35);
+  --cat-fondo-b: oklch(0.49999999999999994 0.14 85);
+  --cat-fondo-b-soft: oklch(0.96 0.04 85);
+  --cat-postres: oklch(0.49999999999999994 0.13 350);
+  --cat-postres-soft: oklch(0.96 0.04 350);
+  --cat-vegetariano: oklch(0.45 0.14 160);
+  --cat-vegetariano-soft: oklch(0.96 0.04 160);
+  --cat-hipocalorico: oklch(0.48000000000000004 0.1 220);
+  --cat-hipocalorico-soft: oklch(0.96 0.04 220);
 }
 
 .dark {
@@ -171,6 +199,20 @@
   --brand: oklch(0.62 0.11 252);
   --brand-foreground: oklch(0.15 0.03 250);
   --brand-soft: oklch(0.28 0.05 252);
+  --cat-sopa: oklch(0.85 0.13 60);
+  --cat-sopa-soft: oklch(0.27 0.05 60);
+  --cat-ensalada: oklch(0.7999999999999999 0.15 140);
+  --cat-ensalada-soft: oklch(0.27 0.05 140);
+  --cat-fondo-a: oklch(0.7 0.15 35);
+  --cat-fondo-a-soft: oklch(0.27 0.05 35);
+  --cat-fondo-b: oklch(0.7999999999999999 0.14 85);
+  --cat-fondo-b-soft: oklch(0.27 0.05 85);
+  --cat-postres: oklch(0.7999999999999999 0.13 350);
+  --cat-postres-soft: oklch(0.27 0.05 350);
+  --cat-vegetariano: oklch(0.75 0.14 160);
+  --cat-vegetariano-soft: oklch(0.27 0.05 160);
+  --cat-hipocalorico: oklch(0.78 0.1 220);
+  --cat-hipocalorico-soft: oklch(0.27 0.05 220);
 }
 
 @layer base {
