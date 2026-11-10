@@ -5,7 +5,7 @@ import { AppShell } from "@/components/casino/AppShell";
 import { PlatoExpandible } from "@/components/casino/PlatoExpandible";
 import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { CATEGORIAS_MENU, menuDelDia } from "@/lib/menu-diario";
+import { CATEGORIAS_MENU, menuDelDia, type CategoriaMenu } from "@/lib/menu-diario";
 import { cn } from "@/lib/utils";
 import {
   DIAS,
@@ -40,6 +40,16 @@ export const Route = createFileRoute("/")({
   }),
   component: Panel,
 });
+
+const COLOR_CATEGORIA: Record<CategoriaMenu, string> = {
+  sopa: "border-cat-sopa/40 bg-cat-sopa-soft text-cat-sopa",
+  ensalada: "border-cat-ensalada/40 bg-cat-ensalada-soft text-cat-ensalada",
+  "fondo-a": "border-cat-fondo-a/40 bg-cat-fondo-a-soft text-cat-fondo-a",
+  "fondo-b": "border-cat-fondo-b/40 bg-cat-fondo-b-soft text-cat-fondo-b",
+  postres: "border-cat-postres/40 bg-cat-postres-soft text-cat-postres",
+  vegetariano: "border-cat-vegetariano/40 bg-cat-vegetariano-soft text-cat-vegetariano",
+  hipocalorico: "border-cat-hipocalorico/40 bg-cat-hipocalorico-soft text-cat-hipocalorico",
+};
 
 function Panel() {
   const { platoDe, platos, suscripcion, reservas } = useCasino();
@@ -139,8 +149,10 @@ function Panel() {
 
       <Accordion key={dia} type="multiple" className="mt-6 grid items-start gap-x-6 gap-y-5 md:grid-cols-2">
         {CATEGORIAS_MENU.map((categoria) => (
-          <section key={categoria.id} aria-labelledby={`categoria-${categoria.id}`} className="min-w-0">
-            <h2 id={`categoria-${categoria.id}`} className="mb-2 font-[family-name:var(--font-display)] text-lg font-semibold">{categoria.nombre}</h2>
+          <section key={categoria.id} aria-labelledby={`categoria-${categoria.id}`} className={cn("min-w-0 rounded-xl border-2 p-4", COLOR_CATEGORIA[categoria.id])}>
+            <h2 id={`categoria-${categoria.id}`} className="mb-3 flex items-center gap-2 font-[family-name:var(--font-display)] text-lg font-semibold">
+              <span aria-hidden="true" className="text-2xl">{categoria.emoji}</span>{categoria.nombre}
+            </h2>
             <div className="space-y-2">
               {menu.filter((p) => p.categoria === categoria.id).map((p) => (
                 <PlatoExpandible key={p.id} plato={p} compromiso={p.disponibilidad.map((d) => comprometidos.get(d.plato.key)).find(Boolean)} />

@@ -1,14 +1,14 @@
 import { COMEDORES, keyDe, type DiaId, type Plato } from "./casino-data";
 
 export type CategoriaMenu = "sopa" | "ensalada" | "fondo-a" | "fondo-b" | "postres" | "vegetariano" | "hipocalorico";
-export const CATEGORIAS_MENU: { id: CategoriaMenu; nombre: string }[] = [
-  { id: "sopa", nombre: "Sopa" },
-  { id: "ensalada", nombre: "Ensalada" },
-  { id: "fondo-a", nombre: "Fondo A" },
-  { id: "fondo-b", nombre: "Fondo B" },
-  { id: "postres", nombre: "Postres" },
-  { id: "vegetariano", nombre: "Vegetariano" },
-  { id: "hipocalorico", nombre: "Hipocalórico" },
+export const CATEGORIAS_MENU: { id: CategoriaMenu; nombre: string; emoji: string }[] = [
+  { id: "sopa", emoji: "🍲", nombre: "Sopa" },
+  { id: "ensalada", emoji: "🥗", nombre: "Ensalada" },
+  { id: "fondo-a", emoji: "🍖", nombre: "Fondo A" },
+  { id: "fondo-b", emoji: "🍝", nombre: "Fondo B" },
+  { id: "postres", emoji: "🍮", nombre: "Postres" },
+  { id: "vegetariano", emoji: "🥕", nombre: "Vegetariano" },
+  { id: "hipocalorico", emoji: "🐟", nombre: "Hipocalórico" },
 ];
 
 type Receta = { nombre: string; alergenos: string[] };
